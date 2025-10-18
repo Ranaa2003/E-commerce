@@ -1,0 +1,9 @@
+.discover{
+    background-image: url('/images/e0f1344c08646a66ad3ef526386601b7ff16b4bc.jpg');
+    background-position: top;
+    background-size: cover;
+    height: 50vh;
+    
+}
+/* 
+bg-(url('/images/e0f1344c08646a66ad3ef526386601b7ff16b4bc.jpg')) bg-cover bg-center */

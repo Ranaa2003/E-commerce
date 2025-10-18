@@ -1,0 +1,141 @@
+<section class="min-h-screen bg-gray-100 py-10 px-4 md:px-10">
+  <div
+    class="max-w-7xl mx-auto bg-white shadow-lg rounded-2xl p-6 md:p-10 transition-all duration-300"
+  >
+    <h1
+      class="text-center text-[var(--text-color)] dark:text-white text-3xl md:text-4xl font-semibold mb-8"
+    >
+      My Shopping Cart
+    </h1>
+
+    <div
+      class="flex flex-col lg:flex-row gap-8 items-start justify-between w-full"
+    >
+      <div
+        class="flex-1 w-full lg:w-auto bg-white rounded-xl  overflow-x-auto shadow-md"
+      >
+        <table class="min-w-full text-sm">
+          <thead>
+            <tr
+              class="text-center border-b border-gray-300 text-gray-600 uppercase text-xs font-medium tracking-wide"
+            >
+              <th class="text-left px-3 py-3 text-gray-600 text-lg">Product</th>
+              <th class="px-3 py-3 text-gray-600 text-lg">Price</th>
+              <th class="px-3 py-3 text-gray-600 text-lg">Qty</th>
+              <th class="px-3 py-3"></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @if (!emptyCart) { @for (cartItem of Cart.products; track
+            cartItem.product._id) {
+            <tr
+              class="text-center border-b border-gray-200 hover:bg-gray-50 transition"
+            >
+              <td class="px-3 py-3 flex items-center gap-3 text-left">
+                <img
+                  [src]="cartItem.product.imageCover"
+                  alt="{{ cartItem.product.title }}"
+                  class="w-16 h-16 rounded-lg object-cover"
+                />
+                <span class="font-medium text-gray-700 line-clamp-2">{{
+                  cartItem.product.title
+                }}</span>
+              </td>
+
+              <td class="px-3 py-3 text-gray-700 font-medium">
+                {{ cartItem.price }} EGP
+              </td>
+
+              <td class="py-4 flex justify-center items-center">
+                <div
+                  class="flex  items-center justify-between w-24 border border-gray-300 rounded-full px-3 py-1 bg-white"
+                >
+                  <i
+                    class="fas fa-minus text-gray-600 cursor-pointer hover:text-[var(--main-color)]"
+                    (click)="
+                      UpdateCount(cartItem.product._id, cartItem.count - 1)
+                    "
+                  ></i>
+                  <span class="w-10 text-center text-gray-800 font-medium">{{
+                    cartItem.count
+                  }}</span>
+                  <i
+                    class="fas fa-plus text-gray-600 cursor-pointer hover:text-[var(--main-color)]"
+                    (click)="
+                      UpdateCount(cartItem.product._id, cartItem.count + 1)
+                    "
+                  ></i>
+                </div>
+              </td>
+
+              <td class="px-3 py-3">
+                <button
+                  class="p-2 cursor-pointer hover:bg-gray-100 rounded-full transition"
+                  (click)="removeCartItme(cartItem.product._id)"
+                >
+                  <i class="fa-solid fa-xmark text-gray-600"></i>
+                </button>
+              </td>
+            </tr>
+            } } @else {
+            <tr>
+              <td colspan="4" class="text-center py-10 text-gray-500">
+                Your cart is empty 🛍️
+              </td>
+            </tr>
+            }
+          </tbody>
+
+          <tfoot>
+            <tr>
+              <td colspan="4" class="text-right py-4">
+                <button
+                  (click)="clearCart()"
+                  [disabled]="emptyCart"
+                  class="px-6 me-2 py-2 cursor-pointer text-sm bg-gray-200 hover:bg-gray-300 text-gray-700 disabled:cursor-not-allowed rounded-full font-semibold transition"
+                >
+                  Clear Cart
+                </button>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <div class="w-full lg:w-[400px] bg-white rounded-2xl p-6 shadow-md">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">Cart Summary</h2>
+
+        <div class="space-y-3">
+          <div class="flex justify-between text-gray-600">
+            <span>Total:</span>
+            <span class="font-semibold text-gray-900"
+              >{{ Cart.totalCartPrice }} EGP</span
+            >
+          </div>
+
+          <div class="flex justify-between text-gray-600">
+            <span>Shipping:</span>
+            <span class="text-gray-900 font-medium">Free</span>
+          </div>
+
+          <div class="flex justify-between text-gray-600 border-t pt-3">
+            <span>Subtotal:</span>
+            <span class="font-semibold text-gray-900"
+              >{{ Cart.totalCartPrice }} EGP</span
+            >
+          </div>
+        </div>
+
+        <button
+          [disabled]="emptyCart"
+          [routerLink]="['/checkout', Cart._id]"
+          class="mt-6 w-full py-3 px-6 cursor-pointer disabled:cursor-not-allowed disabled:bg-[var(--second-color)] disabled:text-white text-white font-semibold rounded-full bg-[var(--main-color)] border border-transparent hover:bg-white hover:text-[var(--main-color)] hover:border-[var(--main-color)] transition-all duration-300 flex items-center justify-center gap-2"
+        >
+          Proceed to Checkout
+          <i class="fa-solid fa-arrow-right-long"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

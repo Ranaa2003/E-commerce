@@ -1,1 +1,75 @@
 /* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+@import "flowbite/src/themes/default";
+@plugin "flowbite/plugin";
+@source "../node_modules/flowbite";
+@layer {
+  .btn {
+    @apply w-full flex justify-center items-center gap-2 bg-green-800 text-white py-2 px-4 rounded-3xl hover:bg-green-900 disabled:bg-green-800/50 cursor-pointer transition-colors duration-200
+  }
+
+  /*bg-[#6BC785]*/
+
+  .font-play {
+    font-family: "Playwrite AU SA", cursive;
+  }
+
+  .container {
+    margin-inline: auto;
+  }
+
+  .main-input {
+    @apply block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 dark:bg-gray-700 border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600
+  }
+
+  .main-label {
+    @apply absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto
+  }
+
+  .main-input.ng-valid.ng-touched {
+    @apply border-green-700;
+  }
+
+  .main-input.ng-invalid.ng-touched {
+    @apply border-red-700;
+  }
+
+  .main-input.ng-valid.ng-touched~.main-label {
+    @apply text-green-700;
+  }
+
+  .main-input.ng-invalid.ng-touched~.main-label {
+    @apply text-red-700;
+  }
+
+  .card {
+    @apply block text-start relative
+  }
+
+  .main-color {
+    @apply bg-green-800;
+  }
+  .active-link {
+  @apply  font-bold text-[var(--main-color)];
+}
+  .active {
+  @apply text-xl text-[var(--main-color)];
+}
+
+}
+
+body {
+   font-family: 'Poppins', Arial,sans-serif;
+  --main-color: #8b5e35;
+  --main-color-hover: #724c39;
+  --second-color: #9B7E5C;
+  --text-color: #090F41;
+  --second-text: #9D9DAA;
+  --third-text: #C0C0C0;
+  --bg-footer: #2E2E2E;
+  --bg: #F6F6F6;
+  --card-color: #FFF;
+  --error: #D00439;
+  --review: #FFC000;
+  background: var(--bg);
+}

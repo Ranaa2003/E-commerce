@@ -1,0 +1,7 @@
+/* ::ng-deep .owl-carousel .owl-dots .owl-dot span  {
+    transform: translateY(-30px);
+} */
+
+:host ::ng-deep .owl-carousel .owl-item{
+   max-height: 400px;
+}

@@ -1,0 +1,67 @@
+<section class="min-h-screen bg-white px-6 py-10 lg:px-20">
+  <h2 class="text-3xl mb-8 font-semibold text-[var(--text-color)]">Products</h2>
+
+  <div class="lg:flex gap-8">
+    <app-sidebar
+      class=""
+      (filtersChanged)="onFiltersChanged($event)"
+    ></app-sidebar>
+
+    <div class="flex-1">
+      <div class="flex justify-between items-center mb-6 sm:px-5 md:px-0">
+        <p class="text-lg text-gray-600">{{ total }} items</p>
+        <select
+          class="border border-gray-300 rounded-md px-6 py-2 text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-[var(--main-color)] focus:border-gray-50 hover:border-gray-400 transition ease-in-out duration-150"
+          (change)="onSortChanged($event)"
+        >
+          <option value=" ">Sort</option>
+          <option value="low ">Price: Low to High</option>
+          <option value="high ">Price: High to Low</option>
+        </select>
+      </div>
+
+      <div
+        class="grid grid-cols-1 px-20 sm:px-5 sm:grid-cols-2 md:px-0 md:grid-cols-3 lg:px-1 lg:mx-0 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+      >
+        @if(total===0){
+
+        <div class="col-span-full text-center py-16">
+          <h2 class="text-xl font-semibold text-gray-700">No products found</h2>
+          <p class="text-gray-500 mt-2">
+            Try adjusting your filters or check back later.
+          </p>
+        </div>
+        } @else { @for (product of productList | paginate: { id: 'foo',
+        itemsPerPage: pageSize, currentPage: p, totalItems: total }; track
+        product.id) {
+        <div class="relative">
+          <app-card [product]="product" class=""></app-card>
+          <button
+            (click)="toggleWishlist(product)"
+            class="absolute right-3 top-3 [font-size:20px] cursor-pointer py-2 px-1 rounded-full shadow-md flex items-center hover:scale-110 justify-center transition-all duration-300"
+            [class.bg-[var(--main-color)]]="isInWishlist(product)"
+            [class.text-white]="isInWishlist(product)"
+          >
+            <i
+              class="fa-heart"
+              [class.fa-solid]="isInWishlist(product)"
+              [class.fa-regular]="!isInWishlist(product)"
+              [class.text-[var(--main-color)]]="!isInWishlist(product)"
+              [class.text-white]="isInWishlist(product)"
+            ></i>
+          </button>
+        </div>
+        } }
+      </div>
+      <div class="flex justify-center items-center mt-10">
+        <pagination-controls
+          id="foo"
+          (pageChange)="getAllProductWithPage($event)"
+          class="text-center"
+          previousLabel="Prev"
+          nextLabel="Next "
+        ></pagination-controls>
+      </div>
+    </div>
+  </div>
+</section>

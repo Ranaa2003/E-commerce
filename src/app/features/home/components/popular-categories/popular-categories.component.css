@@ -1,0 +1,56 @@
+:host ::ng-deep .owl-stage-outer {
+    height: 250px;
+}
+
+:host ::ng-deep .owl-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+:host ::ng-deep .owl-stage-outer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+:host ::ng-deep .owl-item img {
+    border-radius: 9999px;
+    margin-bottom: 10px;
+    min-width: 100px;
+    min-height: 100px;
+    max-width: 100px;
+    max-height: 100px;
+}
+
+:host ::ng-deep .owl-nav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+:host ::ng-deep .owl-theme .owl-nav div {
+    background-color: rgba(255, 255, 255);
+    border-radius: 9999px;
+    width: 45px;
+    height: 45px;
+    border: 1px solid var(--second-color);
+    font-size: 22px;
+    border-radius: 50%;
+    color: var(--second-color);
+    display: flex;
+    pointer-events: auto;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+    cursor: pointer;
+}
+
+:host ::ng-deep .owl-nav button:hover {
+    background: var(--second-color);
+}

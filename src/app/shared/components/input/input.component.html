@@ -1,0 +1,85 @@
+@if(element==='text'){
+<!-- <div class="relative mb-4">
+  <textarea
+    [rows]="rows"
+    [id]="idInput"
+    [formControl]="control"
+    class="main-input peer rounded-lg"
+    placeholder=" "
+  ></textarea>
+  <label [for]="labelInput" class="main-label">{{ labelInput }}</label>
+  @if (control?.errors && control?.touched) {
+  <div
+    class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+    role="alert"
+  >
+    @if (control?.getError('required')) {
+    <li>{{ labelInput }} is required</li>
+    } @if (control?.getError('minlength')) {
+    <li>{{ labelInput }} must be at least 3 characters</li>
+    } @if (control?.getError('maxlength')) {
+    <li>{{ labelInput }} must be at most 20 characters</li>
+    } @else if (control?.getError('email')) {
+    <li>Invalid email address</li>
+    } @else if (control?.getError('pattern')) {
+    <li>
+      Password must be at least 6 characters and contain only letters, numbers,
+      or _
+    </li>
+    }
+  </div>
+  }
+</div> -->
+
+<div class="mb-5 relative">
+  <label [for]="idInput" class="block mb-2 text-sm font-medium text-gray-900">
+    {{ labelInput }}
+  </label>
+
+  <div class="relative">
+    <textarea
+      [rows]="rows"
+      [id]="idInput"
+      [formControl]="control"
+      [placeholder]="palceholder"
+      class="bg-gray-50 border ring ring-gray-300 border-gray-300 text-black placeholder-gray-400/90 text-sm rounded-lg focus:ring-[var(--second-color)] block w-full p-2.5 pl-10 outline-none resize-none"
+    ></textarea>
+
+    <i
+      [class]="icon"
+      class="absolute left-3 top-3 text-[var(--second-color)] z-10"
+    ></i>
+  </div>
+</div>
+
+} @else if (element==='input') {
+
+<div class="mb-5 relative">
+  <label
+    [for]="labelInput"
+    class="block mb-2 text-sm font-medium text-gray-900"
+    >{{ labelInput }}</label
+  >
+  <div class="relative">
+    <input
+      [id]="idInput"
+      [formControl]="control"
+      [attr.autocomplete]="
+        typeInput === 'email'
+          ? 'email'
+          : typeInput === 'password'
+          ? 'new-password'
+          : 'off'
+      "
+      [type]="typeInput"
+      class="bg-gray-50 border ring ring-gray-300 border-gray-300 text-black placeholder-gray-400/90 text-sm rounded-lg focus:ring-[var(--second-color)] focus:border-[var(--second-color)] block w-full p-2.5 pl-10 outline-none"
+      [placeholder]="palceholder"
+      [readOnly]="readonly"
+    />
+  </div>
+  <i
+    [class]="icon"
+    class="absolute left-3 top-1/2 translate-y-1/2 text-[var(--second-color)] z-10"
+  ></i>
+</div>
+}

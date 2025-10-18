@@ -1,0 +1,26 @@
+<section class="block text-center m-10 py-10">
+  <div class="container mx-auto px-4 md:px-10 xl:px-20">
+    <h2 class="text-2xl mb-2 font-semibold text-[var(--main-color)]">
+      Products
+    </h2>
+    <p class="text-2xl mb-2 font-bold text-[var(--text-color)]">
+      Best Selling Products
+    </p>
+
+    <div
+      class="parent my-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6"
+    >
+      @for (product of productList.slice(0,8); track product.id) {
+        <app-card [product]="product" class="w-full max-w-sm mx-auto" />
+      }
+    </div>
+
+    <button
+      routerLink="/products"
+      class="text-[var(--main-color)] cursor-pointer rounded-3xl bg-transparent  group/btn
+      border border-[var(--main-color)] px-4 py-3 hover:bg-[var(--main-color)] hover:border-white hover:text-white transition-all duration-300"
+    >
+      See All <i class="fas fa-chevron-right text-[var(--main-color)] group-hover/btn:text-white"></i>
+    </button>
+  </div>
+</section>

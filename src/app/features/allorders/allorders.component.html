@@ -1,0 +1,115 @@
+<section class="min-h-screen bg-gray-100 py-10 px-6 lg:px-20">
+  <h2 class="text-3xl font-bold text-[var(--text-color)] mb-8 text-center">
+    My Orders
+  </h2>
+
+  @if ( ordersList.length === 0) {
+    <div class="text-center py-20">
+      <i class="fa-solid fa-box-open text-gray-400 text-6xl mb-4"></i>
+      <p class="text-gray-500 text-lg font-medium">
+        You haven’t placed any orders yet.
+      </p>
+    </div>
+  }
+
+  @if (ordersList.length > 0) {
+    <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+      @for (order of ordersList; track order._id) {
+        <div
+          class="bg-white rounded-2xl shadow-md p-6 hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col justify-between"
+        >
+          <!-- 🏷️ Header -->
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xl font-semibold text-gray-700">
+              Order #{{ order._id.slice(-6).toUpperCase() }}
+            </h3>
+            <span
+              [class]="
+                order.isDelivered
+                  ? 'bg-green-100 text-green-600'
+                  : 'bg-yellow-100 text-yellow-600'
+              "
+              class="px-4 py-1 text-sm font-semibold rounded-full"
+            >
+              {{ order.isDelivered ? 'Delivered' : 'Processing' }}
+            </span>
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-3 text-gray-600 mb-4 text-sm">
+            <p>
+              <i
+                class="fa-solid fa-calendar-days mr-2 text-[var(--main-color)]"
+              ></i>
+              <strong>Date:</strong> {{ order.createdAt | date : 'medium' }}
+            </p>
+
+            <p>
+              <i
+                class="fa-solid fa-credit-card mr-2 text-[var(--main-color)]"
+              ></i>
+              <strong>Payment:</strong>
+              {{ order.paymentMethodType | titlecase }}
+            </p>
+
+            <p>
+              <i
+                class="fa-solid fa-location-dot mr-2 text-[var(--main-color)]"
+              ></i>
+              <strong>City:</strong> {{ order.shippingAddress.city }}
+            </p>
+
+            <p>
+              <i class="fa-solid fa-phone mr-2 text-[var(--main-color)]"></i>
+              <strong>Phone:</strong> {{ order.shippingAddress.phone }}
+            </p>
+          </div>
+
+          <div class="bg-gray-50 rounded-lg p-3 mb-4">
+            <p class="text-sm text-gray-500 font-semibold mb-2">
+              <i
+                class="fa-solid fa-cart-shopping text-[var(--main-color)] mr-2"
+              ></i>
+              {{ order.cartItems.length }} Items
+            </p>
+            <div class="space-y-2 max-h-32 overflow-y-auto px-2">
+              @for (item of order.cartItems; track item._id) {
+                <div class="flex justify-between items-center text-sm">
+                  <div class="flex items-center gap-2">
+                    <img
+                      [src]="item.product.imageCover"
+                      alt="product"
+                      class="w-10 h-10 rounded-lg object-cover"
+                    />
+                    <p class="truncate max-w-[140px]">
+                      {{ item.product.title }}
+                    </p>
+                  </div>
+                  <span class="text-gray-700 font-medium"
+                    >x{{ item.count }}</span
+                  >
+                </div>
+              }
+            </div>
+          </div>
+
+          <div class="flex justify-between items-center mt-auto">
+            <p
+              class="text-lg font-semibold text-[var(--main-color)] flex items-center"
+            >
+              <i
+                class="fa-solid fa-money-bill-wave mr-2 text-[var(--main-color)]"
+              ></i>
+              {{ order.totalOrderPrice | currency : 'EGP' }}
+            </p>
+
+            <button
+              class="px-5 py-2 rounded-full bg-[var(--main-color)] text-white hover:bg-white hover:text-[var(--main-color)] border border-[var(--main-color)] transition-all duration-300 font-semibold text-sm"
+            >
+              View Details
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</section>

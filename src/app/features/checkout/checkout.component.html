@@ -1,0 +1,122 @@
+<section
+  class="min-h-[91vh] flex items-center justify-center bg-gray-100 py-10 px-4"
+>
+  <div
+    class="bg-white w-full max-w-5xl rounded-2xl shadow-xl p-6 md:p-10 grid grid-cols-1 md:grid-cols-2 gap-10"
+  >
+    <div>
+      <h1
+        class="text-3xl font-bold text-[var(--text-color)] mb-3 flex items-center gap-2"
+      >
+        CheckOut
+      </h1>
+
+      <form [formGroup]="checkOutForm" class="space-y-6">
+        <app-input
+          [control]="checkOutForm.get('shippingAddress')?.get('details')"
+          [element]="'text'"
+          [idInput]="'details'"
+          [labelInput]="'Details'"
+          [icon]="'fa-solid fa-location-dot'"
+          [palceholder]="'Address Details'"
+        ></app-input>
+
+        <app-input
+          [control]="checkOutForm.get('shippingAddress')?.get('phone')"
+          [idInput]="'phone'"
+          [labelInput]="'Phone'"
+          [icon]="'fa-solid fa-phone'"
+          [palceholder]="'Phone Number'"
+        ></app-input>
+       
+        <app-input
+          [control]="checkOutForm.get('shippingAddress')?.get('city')"
+          [typeInput]="'text'"
+          [idInput]="'city'"
+          [labelInput]="'City'"
+          [icon]="'fa-solid fa-city'"
+          [palceholder]="'City'"
+        ></app-input>
+
+        <div class="flex flex-col sm:flex-row gap-4 mt-8">
+          <button
+            type="submit"
+            (click)="payByVisa()"
+            class="w-full cursor-pointer sm:w-1/2 py-3 px-6 text-white font-semibold rounded-full bg-[var(--main-color)] border border-transparent hover:bg-white hover:text-[var(--main-color)] hover:border-[var(--main-color)] transition-all duration-300 flex items-center justify-center gap-2"
+          >
+            <i class="fa-solid fa-credit-card"></i>
+            Payment By Visa
+          </button>
+
+          <button
+            type="submit"
+            (click)="payByCash()"
+            class="w-full cursor-pointer sm:w-1/2 py-3 px-6 text-white font-semibold rounded-full bg-[var(--main-color)] border border-transparent hover:bg-white hover:text-[var(--main-color)] hover:border-[var(--main-color)] transition-all duration-300 flex items-center justify-center gap-2"
+          >
+            <i class="fa-solid fa-money-bill-wave"></i>
+            Payment By Cash
+          </button>
+        </div>
+         <div>
+          @if (checkOutForm.get('shippingAddress')?.get('details')?.touched &&checkOutForm.get('shippingAddress')?.get('details')?.invalid) {
+           @if (checkOutForm.get('shippingAddress')?.get('details')?.hasError('required')) {
+          <p
+            class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-red-600 border border-red-600 rounded-lg"
+          >
+            Details is required
+          </p>}
+          }
+          @else if (checkOutForm.get('shippingAddress')?.get('phone')?.touched &&checkOutForm.get('shippingAddress')?.get('phone')?.invalid) {
+           @if (checkOutForm.get('shippingAddress')?.get('phone')?.hasError('required')) {
+          <p
+            class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-red-600 border border-red-600 rounded-lg"
+          >
+            Phone is required
+          </p>
+          } @else if (checkOutForm.get('shippingAddress')?.get('phone')?.hasError('pattern')) {
+          <p
+            class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-red-600 border border-red-600 rounded-lg"
+          >
+            Phone format is invalid
+          </p>
+          } 
+          }
+           @else if (checkOutForm.get('shippingAddress')?.get('city')?.touched &&checkOutForm.get('shippingAddress')?.get('city')?.invalid) {
+           @if (checkOutForm.get('shippingAddress')?.get('city')?.hasError('required')) {
+          <p
+            class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-red-600 border border-red-600 rounded-lg"
+          >
+            City is required
+          </p>}
+          }
+        </div>
+      </form>
+    </div>
+
+    <div class="flex flex-col justify-center rounded-2xl p-6 md:p-8 shadow-md">
+      <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+        <i class="fa-solid fa-clipboard-list text-[var(--main-color)]"></i>
+        Order Summary
+      </h2>
+      <hr class="border-gray-300 mb-5" />
+
+      <div class="flex justify-between text-lg text-gray-700 mb-4">
+        <p class="flex items-center gap-2">
+          <i class="fa-solid fa-box"></i>
+          {{ Cart.products?.length || 0 }} Items
+        </p>
+        <p class="font-semibold flex items-center gap-2">
+          <i class="fa-solid fa-tag text-[var(--main-color)]"></i>
+          {{ Cart.totalCartPrice || 0 }} EGP
+        </p>
+      </div>
+
+      <hr class="border-gray-300 mb-5" />
+
+      <p class="text-sm text-gray-500 flex items-center gap-2">
+        <i class="fa-solid fa-truck text-[var(--main-color)]"></i>
+        Delivery fees and taxes are free
+      </p>
+    </div>
+  </div>
+</section>
