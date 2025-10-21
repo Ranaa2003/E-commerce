@@ -13,7 +13,7 @@
     <form [formGroup]="contactForm" class="space-y-6">
       <div class="flex flex-col md:flex-row gap-5">
         <app-input
-          [control]="contactForm?.get('name')"
+          [control]="contactForm.get('name')"
           [idInput]="'firstName'"
           [labelInput]="'First Name'"
           [icon]="'fa-solid fa-user'"
@@ -22,7 +22,7 @@
         ></app-input>
 
         <app-input
-          [control]="contactForm?.get('name')"
+          [control]="contactForm.get('name')"
           [idInput]="'lastName'"
           [labelInput]="'Last Name'"
           [icon]="'fa-solid fa-user'"
@@ -33,7 +33,7 @@
 
       <div class="flex flex-col md:flex-row gap-5">
         <app-input
-          [control]="contactForm?.get('email')"
+          [control]="contactForm.get('email')"
           [idInput]="'email'"
           [labelInput]="'Email'"
           [icon]="'fa-solid fa-envelope'"
@@ -42,7 +42,7 @@
         ></app-input>
 
         <app-input
-          [control]="contactForm?.get('phone')"
+          [control]="contactForm.get('phone')"
           [idInput]="'phone'"
           [labelInput]="'Phone'"
           [icon]="'fa-solid fa-phone'"
@@ -53,7 +53,7 @@
 
       <div class="mb-3">
         <app-input
-          [control]="contactForm?.get('message')"
+          [control]="contactForm.get('message')"
           [idInput]="'message'"
           [labelInput]="'Message'"
           [element]="'text'"

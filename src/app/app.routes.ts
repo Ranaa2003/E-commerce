@@ -7,7 +7,6 @@ import { HomeComponent } from './features/home/home.component';
 import { CartComponent } from './features/cart/cart.component';
 import { ProductsComponent } from './features/products/products.component';
 import { DetailsComponent } from './features/details/details.component';
-import { BrandsComponent } from './features/brands/brands.component';
 import { CategoriesComponent } from './features/categories/categories.component';
 import { NotfoundComponent } from './features/notfound/notfound.component';
 import { authGuard } from './core/guards/auth-guard';
@@ -65,7 +64,7 @@ export const routes: Routes = [
         component: DetailsComponent,
         title: 'Details Page',
       },
-      { path: 'brands', component: BrandsComponent, title: 'Brands Page' },
+     
       {
         path: 'checkout/:id',
         component: CheckoutComponent,

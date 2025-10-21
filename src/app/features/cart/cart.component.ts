@@ -1,6 +1,6 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { CartService } from './cart.service';
-import { Cart } from '../../cart-item.interface';
+import { Cart } from '../../core/models/cart-item.interface';
 import { ToastrService } from 'ngx-toastr';
 import { Router, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
