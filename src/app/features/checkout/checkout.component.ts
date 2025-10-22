@@ -25,23 +25,23 @@ export class CheckoutComponent implements OnInit {
   private readonly wishlistService = inject(WishlistService);
   Cart: Cart = {} as Cart;
   id: string | null = null;
-  checkOutForm!: FormGroup;
-  initForm(): void {
-    this.checkOutForm = this.fb.group({
-      shippingAddress: this.fb.group({
-        details: [null, [Validators.required]],
-        phone: [
-          null,
-          [Validators.required, Validators.pattern(/^01[0125][0-9]{8}$/)],
-        ],
-        city: [null, [Validators.required]],
-      }),
-    });
-  }
+
+  checkOutForm: FormGroup = this.fb.group({
+    shippingAddress: this.fb.group({
+      details: [null, [Validators.required]],
+      phone: [
+        null,
+        [Validators.required, Validators.pattern(/^01[0125][0-9]{8}$/)],
+      ],
+      city: [null, [Validators.required]],
+    }),
+  });
+
   getCartId(): void {
     this.route.paramMap.subscribe({
       next: (paramId) => {
         this.id = paramId.get('id');
+        console.log(this.id)
       },
     });
   }
@@ -87,12 +87,11 @@ export class CheckoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      if (!this.id || this.id === 'undefined') {
+    this.getCartId();
+    if (!this.id || this.id === 'undefined') {
       this.router.navigate(['/cart']);
       return;
-      }
-    this.initForm();
+    }
     this.getCartProducts();
-    this.getCartId();
   }
 }

@@ -44,7 +44,8 @@ export const routes: Routes = [
       { path: 'home', component: HomeComponent, title: 'Home Page' },
       {
         path: 'cart',
-        loadComponent: () => import('./features/cart/cart.component').then((c)=>c.CartComponent),
+        loadComponent: () =>
+          import('./features/cart/cart.component').then((c) => c.CartComponent),
         title: 'Cart Page',
       },
       {
@@ -54,7 +55,10 @@ export const routes: Routes = [
       },
       {
         path: 'details/:slug/:id',
-        loadComponent: () => import('./features/details/details.component').then((c)=>c.DetailsComponent),
+        loadComponent: () =>
+          import('./features/details/details.component').then(
+            (c) => c.DetailsComponent
+          ),
         title: 'Details Page',
       },
       {
@@ -64,9 +68,13 @@ export const routes: Routes = [
       },
       {
         path: 'checkout/:id',
-        loadComponent: () => import('./features/checkout/checkout.component').then((c)=>c.CheckoutComponent),
+        loadComponent: () =>
+          import('./features/checkout/checkout.component').then(
+            (c) => c.CheckoutComponent
+          ),
         title: 'CheckOut Page',
       },
+
       {
         path: 'allorders',
         component: AllordersComponent,
