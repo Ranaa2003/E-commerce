@@ -4,6 +4,8 @@ import { Product } from '../../../../core/models/product.interface';
 import { ProdcutService } from '../../../../core/services/products/prodcut.service';
 import { CardComponent } from "../../../../shared/components/card/card.component";
 import { RouterLink } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { WishlistService } from '../../../wishlist/service/wishlist.service';
 
 @Component({
   selector: 'app-popular-products',
@@ -13,6 +15,8 @@ import { RouterLink } from '@angular/router';
 })
 export class PopularProductsComponent implements OnInit {
  private readonly productService=inject(ProdcutService);
+  private readonly wishlistService = inject(WishlistService);
+   private readonly toastr = inject(ToastrService);
  productSubcription!:Subscription;
  productList:Product[]=[];
  ngOnInit(): void {
@@ -30,4 +34,29 @@ export class PopularProductsComponent implements OnInit {
     }
   })
  }
+ addProductItemToWishList(product: Product): void {
+    this.wishlistService.addProductToWishlist(product).subscribe({
+      next: () => this.toastr.success('Added to wishlist'),
+      error: () => this.toastr.error('Failed to add to wishlist'),
+    });
+  }
+
+  removeProductItemFromWishList(product: Product): void {
+    this.wishlistService.removeProductFromWishlist(product._id).subscribe({
+      next: () => this.toastr.info('Removed from wishlist'),
+      error: () => this.toastr.error('Failed to remove from wishlist'),
+    });
+  }
+
+  toggleWishlist(product: Product): void {
+    if (this.isInWishlist(product)) {
+      this.removeProductItemFromWishList(product);
+    } else {
+      this.addProductItemToWishList(product);
+    }
+  }
+
+  isInWishlist(product: Product): boolean {
+    return this.wishlistService.isInWishlist(product);
+  }
 }

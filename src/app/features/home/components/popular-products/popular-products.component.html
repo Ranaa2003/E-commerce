@@ -11,7 +11,23 @@
       class="parent my-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6"
     >
       @for (product of productList.slice(0,8); track product.id) {
-        <app-card [product]="product" class="w-full max-w-sm mx-auto" />
+       <div class="relative">
+          <app-card [product]="product" class=""></app-card>
+          <button
+            (click)="toggleWishlist(product)"
+            class="absolute right-3 top-3 [font-size:20px] cursor-pointer py-2 px-1 rounded-full shadow-md flex items-center hover:scale-110 justify-center transition-all duration-300"
+            [class.bg-[var(--main-color)]]="isInWishlist(product)"
+            [class.text-white]="isInWishlist(product)"
+          >
+            <i
+              class="fa-heart"
+              [class.fa-solid]="isInWishlist(product)"
+              [class.fa-regular]="!isInWishlist(product)"
+              [class.text-[var(--main-color)]]="!isInWishlist(product)"
+              [class.text-white]="isInWishlist(product)"
+            ></i>
+          </button>
+       </div>
       }
     </div>
 
