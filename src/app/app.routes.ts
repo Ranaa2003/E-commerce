@@ -11,9 +11,7 @@ import { CategoriesComponent } from './features/categories/categories.component'
 import { NotfoundComponent } from './features/notfound/notfound.component';
 import { authGuard } from './core/guards/auth-guard';
 import { isLoggedGuard } from './core/guards/is-logged-guard';
-import { CheckoutComponent } from './features/checkout/checkout.component';
 import { AllordersComponent } from './features/allorders/allorders.component';
-import { FooterComponent } from './shared/components/footer/footer.component';
 import { ForgetpasswordComponent } from './core/auth/forgetpassword/forgetpassword.component';
 import { ContactComponent } from './features/contact/contact.component';
 import { AboutComponent } from './features/about/about.component';
@@ -56,7 +54,7 @@ export const routes: Routes = [
       },
       {
         path: 'details/:slug/:id',
-        component: DetailsComponent,
+        loadComponent: () => import('./features/details/details.component').then((c)=>c.DetailsComponent),
         title: 'Details Page',
       },
       {
@@ -64,10 +62,9 @@ export const routes: Routes = [
         component: DetailsComponent,
         title: 'Details Page',
       },
-     
       {
         path: 'checkout/:id',
-        component: CheckoutComponent,
+        loadComponent: () => import('./features/checkout/checkout.component').then((c)=>c.CheckoutComponent),
         title: 'CheckOut Page',
       },
       {

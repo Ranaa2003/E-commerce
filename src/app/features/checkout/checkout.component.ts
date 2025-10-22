@@ -8,7 +8,7 @@ import {
 import { InputComponent } from '../../shared/components/input/input.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from '../cart/cart.service';
-import { Cart } from '../../core/models/cart-item.interface';
+import { Cart } from '../../cart-item.interface';
 import { WishlistService } from '../wishlist/service/wishlist.service';
 
 @Component({
